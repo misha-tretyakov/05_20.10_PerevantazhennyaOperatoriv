@@ -16,10 +16,54 @@ namespace Practice
         // Додайте перевірку у властивостях, щоб кількість не могла бути від'ємною.
         
         public string ProductName { get; set; }
-        public int ProductCount { get; set; }
+
+        private int _ProductCount = 1;
+        public int ProductCount
+        {
+            get;
+            set
+            {
+                if (value < 0)
+                {
+                    Console.WriteLine("ProductCount can't be less than 0");
+                }
+                else
+                {
+                    _ProductCount = value;
+                }
+            }
+        }
         public int ProductPrice { get; set; }
+
+        public static int operator +(Product p1, int n)
+        {
+            return p1.ProductCount + n;
+        }
         
+        public static int operator -(Product p1, int n)
+        {
+            return p1.ProductCount - n;
+        }
+
+        public static bool operator ==(Product p1, Product p2)
+        {
+            return p1.ProductPrice == p2.ProductPrice;
+        }
         
+        public static bool operator !=(Product p1, Product p2)
+        {
+            return p1.ProductPrice != p2.ProductPrice;
+        }
+
+        public static bool operator <(Product p1, Product p2)
+        {
+            return p1.ProductCount < p2.ProductCount;
+        }
+        
+        public static bool operator >(Product p1, Product p2)
+        {
+            return p1.ProductCount > p2.ProductCount;
+        }
     }
 }
 
